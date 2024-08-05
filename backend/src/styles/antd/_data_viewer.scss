@@ -1,0 +1,29 @@
+.ant-collapse-content-box {
+  white-space: break-spaces;
+}
+
+.ant-drawer-content-wrapper {
+  max-width: 75vw !important;
+
+  .ant-drawer-body {
+    padding: 16px;
+  }
+}
+
+.dark {
+  .ant-spin-dot-item {
+    background-color: #ff914d !important;
+  }
+}
+
+.no-top-border-collapse {
+  &.ant-collapse {
+    .ant-collapse-content {
+      border-top: 0;
+
+      .ant-collapse-content-box {
+        padding-top: 0;
+      }
+    }
+  }
+}

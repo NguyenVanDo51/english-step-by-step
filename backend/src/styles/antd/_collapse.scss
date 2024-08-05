@@ -1,0 +1,8 @@
+.ant-collapse {
+  &.max-height-50 {
+    .ant-collapse-content {
+      max-height: calc(50vh - 46px - 48px);
+      overflow: auto;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+[class*="ant-"], .ant-form-item .ant-form-item-label >label {
+  font-family: inherit;
+}
+
+@import './button';
+@import './collapse';
+@import './input';
+@import './data_viewer';
+@import './form';
+@import './modal';
+@import './other';
+@import './select';
+@import './notification';

@@ -1,0 +1,50 @@
+input.ant-input-lg,
+.ant-input-affix-wrapper-lg {
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.ant-input-affix-wrapper .ant-input-suffix {
+  margin-inline-start: 12px;
+}
+
+.dark {
+  input::placeholder {
+    color: rgb(107 114 128);
+  }
+  textarea::placeholder {
+    color: rgb(107 114 128);
+  }
+  .ant-select-single.ant-select-lg.ant-select-open .ant-select-selection-item {
+    color: rgb(107 114 128);
+  }
+
+  .ant-input-affix-wrapper-focused, .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled) {
+
+    &:hover,
+    &:focus {
+      border-color: var(--primary);
+    }
+  }
+
+  .ant-input-affix-wrapper-focused {
+    border-color: var(--primary);
+    outline: solid 1px var(--primary);
+  }
+}
+
+.ant-slider .ant-slider-track {
+  background-color: var(--primary);
+}
+
+.ant-slider .ant-slider-handle::after {
+  background-color: var(--primary);
+}
+
+.no-padding {
+  textarea {
+    padding-left: 0 !important;
+    min-height: 34px;
+  }
+}

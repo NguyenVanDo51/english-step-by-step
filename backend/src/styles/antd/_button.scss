@@ -1,0 +1,36 @@
+.ant-btn-primary:not(.ant-btn-danger) {
+  background-color: var(--primary);
+}
+
+.ant-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.ant-btn.ant-btn-lg {
+  border-radius: 8px;
+  padding: 4px 16px;
+  height: fit-content;
+}
+
+button.ant-btn.ant-btn-link {
+  padding: 0;
+  span {
+    text-decoration-line: underline;
+  }
+}
+
+.dark {
+  .ant-btn-primary {
+    background-color: #475569;
+
+    &:not(:disabled):not(.ant-btn-disabled):hover {
+      background-color: #64748b;
+    }
+  }
+
+  .ant-btn-text.ant-btn-dangerous:not(:disabled):not(.ant-btn-disabled):hover {
+    background-color: transparent;
+  }
+}

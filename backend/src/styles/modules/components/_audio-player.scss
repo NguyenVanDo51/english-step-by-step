@@ -1,0 +1,57 @@
+$waveW: 0.25em;
+$waveH: 28px;
+$waveEnd: #594bab;
+$waveStart: #5fd2ff;
+$waveLength: 48% 49% 47% 42% 40% 48% 25% 30% 32% 42% 49% 48% 42% 38% 20% 18% 35% 18% 20% 22% 32% 36% 5% 49% 48% 40% 20% 22% 29% 39% 42% 48% 49% 40% 20% 18% 35% 20% 22% 32% 36% 42% 40% 48% 25% 30% 32% 12% 20% 40% 48%;
+
+.sound-wave-bar {
+  display: inline-block;
+  width: $waveW;
+  min-height: 10px;
+  border-radius: 50px;
+}
+
+@for $i from 1 through length($waveLength) {
+  .sound-wave-bar:nth-child(#{$i}) {
+    background: mix($waveStart, $waveEnd, ($i/length($waveLength)) * 100%);
+    height: random($waveH)+0px;
+  }
+}
+
+.sound-wave {
+  display: flex;
+  gap: 2px;
+  white-space: nowrap;
+  min-height: 34px;
+  align-items: center;
+
+  &.playing {
+    .sound-wave-bar {
+      animation: soundwave 1s infinite;
+      animation-fill-mode: both;
+      will-change: transform opacity;
+    }
+
+    @for $i from 1 through length($waveLength) {
+      .sound-wave-bar:nth-child(#{$i}) {
+        animation-duration: random(length($waveLength))/100 + 0.5s;
+      }
+    }
+  }
+}
+
+@keyframes soundwave {
+  from {
+    opacity: .90;
+  }
+
+  50% {
+    height: $waveH;
+    opacity: 1;
+  }
+
+  to {
+    opacity: .90;
+    height: random($waveH)+0px;
+  }
+}

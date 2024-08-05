@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://talk4learn.com/
+
+# Sitemaps
+Sitemap: https://talk4learn.com/sitemap.xml

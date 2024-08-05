@@ -1,0 +1,11 @@
+.message-item {
+  .message-actions {
+    opacity: 0;
+  }
+
+  &:hover {
+    .message-actions {
+      opacity: 1;
+    }
+  }
+}
