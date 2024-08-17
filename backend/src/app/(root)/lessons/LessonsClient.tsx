@@ -38,11 +38,28 @@ export const CreateOrEditLesson: FC<Props> = ({
     },
   })
 
+  const { mutate: editLesson, isPending: isEditPending } = useMutation({
+    mutationKey: ["editLesson"],
+    mutationFn: ({ id, ...payload }: any) => {
+      return httpClient.put(`/api/lessons/${id}`, payload)
+    },
+    onSuccess: () => {
+      refecthLesson()
+      message.success("Thành công")
+      form.resetFields()
+      clearLessonToEdit()
+    },
+  })
+
   const [form] = Form.useForm()
 
   const onFinish = (values: any) => {
     console.log(values)
-    createLesson(values)
+    if (lessonToEdit) {
+      editLesson({ id: lessonToEdit.id, ...values })
+    } else {
+      createLesson(values)
+    }
   }
 
   useEffect(() => {
@@ -59,7 +76,12 @@ export const CreateOrEditLesson: FC<Props> = ({
         {lessonToEdit ? `Chỉnh sửa: ${lessonToEdit.title}` : "Thêm bài học"}
       </h2>
       <Spin spinning={isPending || loading}>
-        <Form form={form} onFinish={onFinish} layout="vertical">
+        <Form
+          form={form}
+          onFinish={onFinish}
+          layout="vertical"
+          initialValues={{}}
+        >
           <Form.Item
             label="Section"
             name="sectionId"
@@ -84,13 +106,27 @@ export const CreateOrEditLesson: FC<Props> = ({
             <Input />
           </Form.Item>
 
+          <Form.Item
+            label="Short Description"
+            name="shortDescription"
+            rules={[
+              {
+                required: true,
+                message: "Please input the short description!",
+              },
+            ]}
+          >
+            <TextArea rows={2} />
+          </Form.Item>
+
           <Button
             className="mb-4"
             onClick={() => {
               setLoading(true)
               const sectionId = form.getFieldValue("sectionId")
               const lesson = form.getFieldValue("title")
-              if (!sectionId || !lesson) {
+              const shortDescription = form.getFieldValue("shortDescription")
+              if (!sectionId || !lesson || !shortDescription) {
                 message.warning(
                   "Vui lòng chọn Section và nhập tiêu đề cho bài học"
                 )
@@ -101,6 +137,7 @@ export const CreateOrEditLesson: FC<Props> = ({
                   params: {
                     section: sections.find((s) => s.id === sectionId)?.title,
                     lesson,
+                    shortDescription,
                   },
                 })
                 .then((res) => {
@@ -119,19 +156,6 @@ export const CreateOrEditLesson: FC<Props> = ({
           >
             AI Generate
           </Button>
-
-          <Form.Item
-            label="Short Description"
-            name="shortDescription"
-            rules={[
-              {
-                required: true,
-                message: "Please input the short description!",
-              },
-            ]}
-          >
-            <TextArea rows={2} />
-          </Form.Item>
 
           <Form.Item label="Long Description" name="longDescription">
             <CKEditorFormItem />

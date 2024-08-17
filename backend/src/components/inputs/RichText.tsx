@@ -58,7 +58,7 @@ export const CKEditorFormItem = ({ value = "", onChange }: any) => (
         Table,
         Undo,
       ],
-      initialData: value,
+      initialData: value || "",
     }}
     data={value}
     onChange={(event, editor) => {

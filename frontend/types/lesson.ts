@@ -1,6 +1,6 @@
 export type LessonHTMLDataType = {
   id: string
-  content: string[] // html | markdown
+  content: string[] // html | markdown | Mỗi trang HTML là một phần tử của mảng
 }
 
 export type LessonPickCorrectAnswerDataType = {
@@ -8,6 +8,7 @@ export type LessonPickCorrectAnswerDataType = {
   question: string // html | markdown
   correctAnswer: string
   wrongAnswer: string[]
+  explanation?: string // html | markdown
 }
 
 export type LessonSlideDataType = {
@@ -22,6 +23,7 @@ export enum LessonPartType {
   PICK_CORRECT_ANSWER = 'PICK_CORRECT_ANSWER',
   MAP_VOCABULARY = 'MAP_VOCABULARY',
   SLIDE = 'SLIDE',
+  COMPLETED = 'COMPLETED',
 }
 
 export type LessonPart<T = any> = {

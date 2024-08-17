@@ -43,8 +43,12 @@ export const PUT = async (
   const body = await req.json()
   try {
     const doc = await firestore.collection(TABLE_NAME.LESSONS).doc(params.id)
+    const data = await doc.get()
 
-    let result = await doc.set(body)
+    let result = await doc.set({
+      ...data.data(),
+      ...body,
+    })
 
     return NextResponse.json(result)
   } catch (e: any) {

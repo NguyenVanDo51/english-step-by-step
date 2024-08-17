@@ -6,25 +6,14 @@ import { Link } from 'expo-router'
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '~/components/ui/collapsible'
 import { ChevronDown } from '~/lib/icons/ChevronDown'
 import { ChevronRight } from '~/lib/icons/ChevronRight'
-import { useQuery } from '@tanstack/react-query'
-import { Lesson } from '~/types/lesson'
-import { Section } from '~/types/section'
-import { httpClient } from '~/services/httpClient'
+import { Lesson } from '~/types'
+import { useSections } from '~/hooks/useSections'
+import { useLessons } from '~/hooks/useLesson'
 
 export default function Screen() {
   const [sectionOpened, setSectionOpened] = React.useState<string[]>([])
-
-  const { data: sections, refetch: refecthSections } = useQuery<Section[]>({
-    queryKey: ['sections'],
-    queryFn: () => httpClient.get('/api/sections').then((r) => r.data),
-    refetchOnWindowFocus: false,
-  })
-
-  const { data: lessons, refetch: refecthLesson } = useQuery<Lesson[]>({
-    queryKey: ['lessons'],
-    queryFn: () => httpClient.get('/api/lessons').then((r) => r.data),
-    refetchOnWindowFocus: false,
-  })
+  const { sections, refecthSections } = useSections()
+  const { lessons, refecthLesson } = useLessons()
 
   const sectionIdToLessons = React.useMemo(() => {
     const obj: { [key: string]: Lesson[] } = {}
